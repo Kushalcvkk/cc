@@ -1,0 +1,32 @@
+___________dynamodb nodejs
+const AWS = require("aws-sdk");
+
+// Configure AWS SDK (Replace with your region)
+AWS.config.update({
+  region: "us-east-1", // Change to your region
+  accessKeyId: "YOUR_ACCESS_KEY",   // Replace with your credentials
+  secretAccessKey: "YOUR_SECRET_KEY",
+});
+
+// Create DynamoDB Document Client
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
+// Define table name and item to insert
+const params = {
+  TableName: "your-table-name", // Replace with your table name
+  Item: {
+    id: "123",        // Primary key (replace as needed)
+    name: "John Doe", // Example attribute
+    age: 30,         // Example attribute
+    email: "john@example.com",
+  },
+};
+
+// Insert item into DynamoDB
+dynamoDB.put(params, (err, data) => {
+  if (err) {
+    console.error("Error inserting item:", err);
+  } else {
+    console.log("Item inserted successfully:", data);
+  }
+});
